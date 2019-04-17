@@ -33,7 +33,7 @@ class LoginCall extends DataFetchCall<LoginResponse> {
   @override
   Future<Response> createApiAsync() {
     /// need to return APIService async task for API request
-    return ApiService.getInstance().login(_request);
+    return apiServiceInstance.login(_request);
   }
 
   /// called when API Response is Success
