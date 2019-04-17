@@ -15,6 +15,7 @@ abstract class DataFetchCall<ResultType> {
   void onSuccess(ResultType response);
 
   ResultType parseJson(Response response);
+
   BehaviorSubject<ApiResponse<ResultType>> observable;
 
   DataFetchCall(BehaviorSubject<ApiResponse<ResultType>> observable) {
@@ -37,16 +38,17 @@ abstract class DataFetchCall<ResultType> {
       Response response = await createApiAsync();
       print("Response : ${response.data}");
       if (response.statusCode >= 200 && response.statusCode <= 299) {
-        ResultType responseModel=parseJson(response);
+        ResultType responseModel = parseJson(response);
         onSuccess(responseModel);
         return ApiResponse.success<ResultType>(responseModel);
       } else {
-        return ApiResponse.failed<ResultType>(
-            new Exception("STATUS CODE : ${response.statusCode}"));
+        return ApiResponse.failed<ResultType>(Error(response.statusCode,
+            response.data.toString(), response.data.toString()));
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return ApiResponse.failed<ResultType>(error);
+      return ApiResponse.failed<ResultType>(
+          Error(500, error.toString(), stacktrace.toString()));
     }
   }
 }

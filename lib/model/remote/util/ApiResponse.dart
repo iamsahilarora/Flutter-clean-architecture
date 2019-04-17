@@ -4,9 +4,9 @@
 class ApiResponse<ResultType> {
   Status status;
   ResultType data;
-  Exception error;
+  Error error;
 
-  ApiResponse(Status status, ResultType data, Exception error) {
+  ApiResponse(Status status, ResultType data, Error error) {
     this.status = status;
     this.data = data;
     this.error = error;
@@ -20,9 +20,16 @@ class ApiResponse<ResultType> {
     return new ApiResponse<ResultType>(Status.SUCCESS, data, null);
   }
 
-  static ApiResponse failed<ResultType>(Exception error) {
+  static ApiResponse failed<ResultType>(Error error) {
     return new ApiResponse<ResultType>(Status.ERROR, null, error);
   }
 }
+
+class Error {
+  int statusCode;
+  String errorMessage;
+  String errorBody;
+
+  Error(this.statusCode, this.errorMessage, this.errorBody);}
 
 enum Status { LOADING, SUCCESS, ERROR }

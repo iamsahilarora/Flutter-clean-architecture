@@ -12,7 +12,7 @@ import 'package:flutter_clean_architecture/view/utils/color_loader.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  /// This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    /// Calling API of Login Using User Bloc
     userBloc.executeLogin(
         LoginRequest("er.sahilbharti@gmail.com", "sahilbharti123"));
   }
@@ -44,9 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /// Get Stream and listen response of Above Login API Called from userBlock
       body: StreamBuilder<ApiResponse<LoginResponse>>(
         stream: userBloc.subject.stream,
         builder: (context, AsyncSnapshot<ApiResponse<LoginResponse>> response) {
+          /// Handle  API Response  STATUS are LOADING.SUCCESS,ERROR
           if (response.data == null || response.data.status == Status.LOADING) {
             return new Center(
               child: ColorLoader(
@@ -55,10 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           } else if (response.data.status == Status.SUCCESS) {
+            /// once Response are suceces/Error we need to call this Subject dispose function
             userBloc.disposeLoginSubject();
             return Center(
                 child: Text("SUCCESS : " + response.data.data.toString()));
           } else if (response.data.status == Status.ERROR) {
+            /// once Response are suceces/Error we need to call this Subject dispose function
             userBloc.disposeLoginSubject();
             return Text("ERROR : " + response.data.error.toString());
           }
