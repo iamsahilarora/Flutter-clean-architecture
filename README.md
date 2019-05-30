@@ -19,7 +19,7 @@ RxDart,DIO,Bloc Framework
   - >  Observe bloc BehaviorSubject(it's Observable) for response    
 
 
-- **ViewModel**  
+- **Bloc**  
   - > Having all BehaviorSubject(Observeable's) of DataModels   
   - > Call getDataReqeust from Repository 
   - > Send requested param and BehaviorSubject to Repository  
