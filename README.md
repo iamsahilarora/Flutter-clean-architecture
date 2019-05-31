@@ -6,9 +6,9 @@ RxDart,DIO,Bloc Framework
 
  - **bloc:** its include all bloc classes which intract between Model and View Communication  
  - **model:** its include given sub modules  
-   - > **remote :** its include Network Call classes like APIConstants,ApiServices using **DIO HTTP Library**    
-   - > **repo :** its include all repository classes which handle the data requests coming from **blocs**      
-   - > **beans :** its include all data classes,models and  db entities used in application
+   -  **remote :** its include Network Call classes like APIConstants,ApiServices using **DIO HTTP Library**    
+   -  **repo :** its include all repository classes which handle the data requests coming from **blocs**      
+   -  **beans :** its include all data classes,models and  db entities used in application
  - **utils:** Utilities Classes 
  - **view:** View Classes Like All MatrialApp,Scafolds,Widgets etc  
  
